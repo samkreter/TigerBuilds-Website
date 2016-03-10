@@ -14,6 +14,7 @@
       <!--<h1 class="project-name">TigerBuilds</h1> -->
       <img src="https://raw.githubusercontent.com/TigerBuilds/LandingPage/master/TigerBuildsLogo.png" alt="TigerBuilds Logo" style="max-width: 100%;">
       <h2 class="project-tagline"></h2>
+      <a href="#apply-to-event" class="btn">Apply Today</a>
       <a href="#about-the-event" class="btn">About</a>
       <a href="#sponsors" class="btn">Sponsors</a>
       <a href="#contact" class="btn">Contact</a>
@@ -30,6 +31,27 @@
 <p>Once teams are formed they will then proceed to research common problems within industries/problem areas which include (but are not limited to) education, communication, transportation, water drought/conservation, disaster response/assistance, and crime monitoring/prevention. Sponsoring companies may also provide problems specific to their respective fields of work for participants to solve. Teams will have roughly a day to research, engineer, and develop their solutions within their diverse teams. Judging of solutions will be done by Mizzou Engineering professors and potentially sponsor company volunteers. </p>
 
 <p>After judging ensues prize-winning solutions will be announced and teams will have the opportunity to present their solutions and collaborate further among members of different teams, faculty, and company representatives. This event has the potential to bring the benefits of already widely existing computer science HackaThons to all disciplines of engineering. Furthermore, and most importantly, this Interdisciplinary Engineering Hackathon provides students the opportunity to work across engineering disciplines which is priceless for real world application. </p>
+
+
+<h3 name="apply-to-event" id="apply-to-event">Apply Today!</h3>
+
+<form action="" method="post" name="login">
+    {{ form.hidden_tag() }}
+    <p>
+        Please fill out the folling information:<br>
+        {{ form.openid(size=80) }}
+        {% for error in form.openid.errors %}
+          <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p>{{ form.remember_me }} Remember Me</p>
+    <p><input type="submit" value="Sign In"></p>
+</form>
+
+
+
+
+
 
 <h3 name="sponsors" id="sponsors"><span aria-hidden="true" class="octicon octicon-link"></span>Sponsorship Information</h3>
 To get all that you possibly can out of TigerBuilds:
