@@ -15,6 +15,13 @@ a {
   a:hover {
     text-decoration: underline; }
 
+section {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
 .btn {
   display: inline-block;
   margin-bottom: 1rem;
