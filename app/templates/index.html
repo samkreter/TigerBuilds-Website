@@ -53,26 +53,27 @@
 </section>
 
 <section name="apply-to-event" id="apply-to-event">
-<h3 name="apply-to-event" id="apply-to-event">Apply Today!</h3>
+<h3 name="apply-to-event" >Apply Today!</h3>
+<div id="login-form-rapper" align="center">
+  <form align="center" id="ap-form" action="/login" method="post"  enctype="multipart/form-data" name="login">
+      {{ form.hidden_tag() }}
+      <p>
+          Please fill out the folling information:<br>
+          First Name<br>
+          {{ form.first_name(size=80) }}<br>
+          Last Name<br>
+          {{ form.last_name(size=80) }}<br>
+          Email<br>
+          {{ form.email(size=80) }}<br>
+          Upload your resume (PDF only)<br>
+          {{form.resume}}<br>
+      </p>
+      <p>{{ form.remember_me }} Remember Me</p>
 
-<form action="/login" method="post"  enctype="multipart/form-data" name="login">
-    {{ form.hidden_tag() }}
-    <p>
-        Please fill out the folling information:<br>
-        First Name<br>
-        {{ form.first_name(size=80) }}<br>
-        Last Name<br>
-        {{ form.last_name(size=80) }}<br>
-        Email<br>
-        {{ form.email(size=80) }}<br>
-        Upload your resume (PDF only)<br>
-        {{form.resume}}<br>
-    </p>
-    <p>{{ form.remember_me }} Remember Me</p>
+      <p><input type="submit" value="Sign In"></p>
+  </form>
 
-    <p><input type="submit" value="Sign In"></p>
-</form>
-
+</div>
 </section>
 
 

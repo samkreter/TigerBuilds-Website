@@ -60,6 +60,17 @@ section {
       margin-top: 1rem;
       margin-left: 0; } }
 
+#login-form-rapper{
+   display: table;
+   width: 10%;
+}
+#ap-form{
+   display: table-cell;
+   text-align: center;
+   vertical-align: middle;
+}
+
+
 .page-header {
   color: #fff;
   text-align: center;
