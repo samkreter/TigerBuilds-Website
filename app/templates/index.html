@@ -10,6 +10,12 @@
     <link rel="stylesheet" type="text/css" href="../static/css/github-light.css" media="screen">
   </head>
   <body>
+  {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
+  {% if success %}
+    <p class=success><strong>{{ success }}</strong>
+  {% endif %}
     <section class="page-header">
       <!--<h1 class="project-name">TigerBuilds</h1> -->
       <img src="https://raw.githubusercontent.com/TigerBuilds/LandingPage/master/TigerBuildsLogo.png" alt="TigerBuilds Logo" style="max-width: 100%;">
@@ -49,7 +55,7 @@
 <section name="apply-to-event" id="apply-to-event">
 <h3 name="apply-to-event" id="apply-to-event">Apply Today!</h3>
 
-<form action="/login" method="post" name="login">
+<form action="/login" method="post"  enctype="multipart/form-data" name="login">
     {{ form.hidden_tag() }}
     <p>
         Please fill out the folling information:<br>
@@ -59,8 +65,11 @@
         {{ form.last_name(size=80) }}<br>
         Email<br>
         {{ form.email(size=80) }}<br>
+        Upload your resume (PDF only)<br>
+        {{form.resume}}<br>
     </p>
     <p>{{ form.remember_me }} Remember Me</p>
+
     <p><input type="submit" value="Sign In"></p>
 </form>
 
