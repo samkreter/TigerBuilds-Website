@@ -4,6 +4,7 @@ from app.models import User
 from .forms import LoginForm
 from app import db
 import os
+from werkzeug import secure_filename
 
 
 
@@ -26,11 +27,11 @@ def login():
     success = None
     if form.validate_on_submit():
         user = User(first_name=form.first_name.data,last_name=form.last_name.data,email=form.email.data)
-        filePath = os.path.join(app.config['UPLOAD_FOLDER'],form.email.data)
+        filePath = os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(form.email.data + ".pdf"))
         f = request.files['resume']
         if f:
             f.save(filePath)
-            db.sessoin.add(user)
+            db.session.add(user)
             db.session.commit()
             success = "Application Complete, Thank You"
             return render_template('index.html',
