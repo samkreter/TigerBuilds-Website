@@ -5,6 +5,7 @@ from .forms import LoginForm
 from app import db
 import os
 from werkzeug import secure_filename
+import tinys3
 
 
 
@@ -31,10 +32,13 @@ def login():
     success = None
     if form.validate_on_submit():
         user = User(first_name=form.first_name.data,last_name=form.last_name.data,email=form.email.data)
-        filePath = os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(form.email.data + ".pdf"))
+        fileName = secure_filename(form.email.data + ".pdf")
         file = request.files['resume']
-        if file and allowed_file(form.resume.data):
-            f.save(filePath)
+        if file:
+            file.save(fileName)
+            conn = tinys3.Connection(app.config['FILESTOREK'],app.config['FILESTOREKS'],tls=True,endpoint="s3-us-west-2.amazonaws.com")
+            f = open(fileName,'rb')
+            conn.upload("resumes/"+fileName,f,'tigerbuilds')
             db.session.add(user)
             db.session.commit()
             success = "Application Complete, Thank You"
