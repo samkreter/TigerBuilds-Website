@@ -19,6 +19,10 @@ def index():
                            error=error)
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -29,7 +33,7 @@ def login():
         user = User(first_name=form.first_name.data,last_name=form.last_name.data,email=form.email.data)
         filePath = os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(form.email.data + ".pdf"))
         f = request.files['resume']
-        if f:
+        if file and allowed_file(form.resume.data):
             f.save(filePath)
             db.session.add(user)
             db.session.commit()
@@ -39,7 +43,7 @@ def login():
                            form=form,
                            error=error,
                            success=success)
-        error = "Failed to save your file"
+        error = "File must be a pdf"
     else:
         error = "Failed to Validate. Check your information"
     return render_template('index.html',
