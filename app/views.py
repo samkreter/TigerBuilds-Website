@@ -34,13 +34,14 @@ def login():
         user = User(first_name=form.first_name.data,last_name=form.last_name.data,email=form.email.data)
         fileName = secure_filename(form.email.data + ".pdf")
         file = request.files['resume']
-        if file:
+        if file and allowed_file(file.filename):
             file.save(fileName)
             conn = tinys3.Connection(app.config['FILESTOREK'],app.config['FILESTOREKS'],tls=True,endpoint="s3-us-west-2.amazonaws.com")
             f = open(fileName,'rb')
             conn.upload("resumes/"+fileName,f,'tigerbuilds')
             db.session.add(user)
             db.session.commit()
+            os.remove(fileName)
             success = "Application Complete, Thank You"
             return render_template('index.html',
                            title='Index',
