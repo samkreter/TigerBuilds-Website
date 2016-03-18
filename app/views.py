@@ -32,7 +32,7 @@ def login():
     if form.validate_on_submit():
         user = User(first_name=form.first_name.data,last_name=form.last_name.data,email=form.email.data)
         filePath = os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(form.email.data + ".pdf"))
-        f = request.files['resume']
+        file = request.files['resume']
         if file and allowed_file(form.resume.data):
             f.save(filePath)
             db.session.add(user)
@@ -43,7 +43,7 @@ def login():
                            form=form,
                            error=error,
                            success=success)
-        error = "File must be a pdf"
+        error = "Resume must be a pdf"
     else:
         error = "Failed to Validate. Check your information"
     return render_template('index.html',
