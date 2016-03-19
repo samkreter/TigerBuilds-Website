@@ -40,10 +40,10 @@ def login():
             conn = tinys3.Connection(app.config['FILESTOREK'],app.config['FILESTOREKS'],tls=True,endpoint="s3-us-west-2.amazonaws.com")
             f = open(fileName,'rb')
             conn.upload("resumes/"+fileName,f,'tigerbuilds')
+            os.remove(fileName)
             try:
               db.session.add(user)
               db.session.commit()
-              os.remove(fileName)
               success = "Application Complete, Thank You"
             except IntegrityError:
               error = "The email you entered already exists"
@@ -54,7 +54,7 @@ def login():
                            success=success)
         error = "Resume must be a pdf"
     else:
-        error = "Failed to Validate. Check your information"
+        error = "Information not correct. You must fill everything out"
     return render_template('index.html',
                            title='Index',
                            form=form,
