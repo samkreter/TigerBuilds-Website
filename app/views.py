@@ -6,6 +6,7 @@ from app import db
 import os
 from werkzeug import secure_filename
 import tinys3
+from sqlalchemy.exc import IntegrityError
 
 
 
