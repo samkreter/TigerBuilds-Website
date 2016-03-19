@@ -39,10 +39,13 @@ def login():
             conn = tinys3.Connection(app.config['FILESTOREK'],app.config['FILESTOREKS'],tls=True,endpoint="s3-us-west-2.amazonaws.com")
             f = open(fileName,'rb')
             conn.upload("resumes/"+fileName,f,'tigerbuilds')
-            db.session.add(user)
-            db.session.commit()
-            os.remove(fileName)
-            success = "Application Complete, Thank You"
+            try:
+              db.session.add(user)
+              db.session.commit()
+              os.remove(fileName)
+              success = "Application Complete, Thank You"
+            except IntegrityError:
+              error = "The email you entered already exists"
             return render_template('index.html',
                            title='Index',
                            form=form,
