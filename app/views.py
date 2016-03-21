@@ -33,7 +33,7 @@ def login():
     success = None
     if form.validate_on_submit():
         user = User(first_name=form.first_name.data,last_name=form.last_name.data,email=form.email.data)
-        fileName = secure_filename(form.email.data + ".pdf")
+        fileName = form.email.data + ".pdf"
         file = request.files['resume']
         if file and allowed_file(file.filename):
             file.save(fileName)
